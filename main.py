@@ -53,11 +53,25 @@ def assign_domain(s1, s2, s3):
     edge_positions = [10, 11, 12, 13]
     for num in edge_positions:
         if position_dict[num-5] == position_dict[num-9]:
-            char = position_dict[num-5]
+            char = position_dict[num]
             if num == 10:
-                char_dict[char].domain = [2, 4, 6, 8]
-            else:
                 char_dict[char].domain = [0, 2, 4, 6, 8]
+    # if duplicate leading letters then domain is [5, 6, 7, 8, 9]
+    if position_dict[5] == position_dict[1]:
+        char = position_dict[1]
+        # if duplicate leading letters are even 
+        if len(char_dict[char].domain) == 5:
+            dup_domain = [0, 2, 4, 6, 8]
+            flag = True
+            for i in dup_domain:
+                if i not in char_dict[char].domain:
+                    flag = False
+                    char_dict[char].domain = [5, 6, 7, 8, 9]
+                    break
+            if flag: # since C4 = 1, and x1 = x5 and they are even x1 + x5 >= 10 for [6, 8]
+                char_dict[char].domain = [6, 8]
+        else:
+            char_dict[char].domain = [5, 6, 7, 8, 9]
     return char_dict
 
 # true if val is not already assigned in state
