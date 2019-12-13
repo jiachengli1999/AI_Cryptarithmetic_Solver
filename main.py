@@ -78,7 +78,8 @@ def can_add_val(state, val, char_dict, char, modify):
         values[p-1] = val
     
     x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13 = \
-    values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], \
+    values[0], values[1], values[2], values[3], values[4], values[5], \
+    values[6], values[7], values[8], values[9], values[10],\
     values[11], values[12]
 
     if x4 != -1 and x8 != -1 and x13 != -1:
@@ -288,7 +289,9 @@ def copy_dict(dict_to_copy):
 
 def check(state):
     values = state.values
-    x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13 = values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12]
+    x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13 = values[0],  \
+    values[1], values[2], values[3], values[4], values[5], values[6], values[7], \
+    values[8], values[9], values[10], values[11], values[12] 
     C1, C2, C3, C4 = 0, 0, 0, 0
     if x13 >= 10:
         C1 = 1
@@ -308,7 +311,8 @@ def check(state):
     # x2 + x6 + C2 = x11 + C3*10
     # x1 + x5 + C3 = x10 + C4*10
     # C4 = x9
-    if (x4 + x8 == x13 + C1*10) and (x3 + x7 + C1 == x12 + C2*10) and (x2 + x6 + C2 == x11 + C3*10) and (x1 + x5 + C3 == x10 + C4*10) and (C4 == x9):
+    if (x4 + x8 == x13 + C1*10) and (x3 + x7 + C1 == x12 + C2*10) \
+    and (x2 + x6 + C2 == x11 + C3*10) and (x1 + x5 + C3 == x10 + C4*10) and (C4 == x9):
         return True
     return False
 
@@ -381,7 +385,8 @@ def backtrack(char_dict, state):
                 if i == -1:
                     flag = False
                     break
-            # if all are assigned then should be correct since only add numbers that satisfy contraints
+            # if all are assigned then should be correct since 
+            # only add numbers that satisfy contraints
             if flag: return True
             positions = char_dict[char].positions
             remove_assigned(state, char, positions)
@@ -418,4 +423,4 @@ def main(file_name):
     print(str_2)
     print(str_3)
 
-main('input2.txt')
+main('input1.txt')
